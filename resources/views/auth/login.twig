@@ -1,0 +1,32 @@
+{% extends 'layouts/master' %}
+
+{% block content %}
+
+	{% set errors = errors.messages %}
+	<form role="form" method="POST" action="" class="login">
+
+
+		<label for="email" class="login__label" data-ref="inputLabel">
+			Email
+		</label>
+		<input id="email" type="email" name="email" value="" class="login__label-input" data-ref="input">
+		{% include 'utilities/forms/errors.twig' with {'errors': errors.email} %}
+
+		<label for="password" class="login__label" data-ref="inputLabel">
+			Password
+		</label>
+		<input id="password" type="password" name="password" class="login__label-input" data-ref="input">
+		{% include 'utilities/forms/errors.twig' with {'errors': errors.password} %}
+
+		<button type="submit" class="login__button">Login</button>
+
+		<div class="login__footer">
+			<a href="" class="login__reset-link">Forgot Your Password?</a>
+
+			<label class="login__checkbox-label">
+				<input type="checkbox" name="remember"> Remember Me
+			</label>
+		</div>
+	</form>
+
+{% endblock %}

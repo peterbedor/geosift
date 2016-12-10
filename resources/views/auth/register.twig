@@ -1,0 +1,35 @@
+{% extends 'layouts/master' %}
+
+{% block content %}
+
+	{% set errors = errors.messages %}
+	<form role="form" method="post" action="" class="register" data-ref="register">
+
+
+		<label for="name" class="register__label">
+			Name
+		</label>
+		<input id="name" type="text" name="name" value="" class="register__label-input" data-ref="input">
+		{% include 'utilities/forms/errors.twig' with {'errors': errors.name} %}
+
+		<label for="email" class="register__label" data-ref="inputLabel">
+			Email
+		</label>
+		<input id="email" type="email" name="email" value="" class="register__label-input" data-ref="input">
+		{% include 'utilities/forms/errors.twig' with {'errors': errors.email} %}
+
+		<label for="password" class="register__label" data-ref="inputLabel">
+			Password
+		</label>
+		<input id="password" type="password" name="password" class="register__label-input" data-ref="input">
+		{% include 'utilities/forms/errors.twig' with {'errors': errors.password} %}
+
+		<label for="password-confirm" class="register__label" data-ref="inputLabel">
+			Confirm Password
+		</label>
+		<input id="password-confirm" type="password" name="password_confirmation" class="register__label-input" data-ref="input">
+		{% include 'utilities/forms/errors.twig' with {'errors': errors.password_confirmation} %}
+
+		<button type="submit" class="register__button">Register</button>
+	</form>
+{% endblock %}
