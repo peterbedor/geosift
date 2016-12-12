@@ -5,5 +5,16 @@
 {% block content %}
 	{% include 'partials.sections.dashboard-navigation' %}
 
-	<a href="/home/collections/new">New</a>
+	<a href="/collections/new">New</a>
+
+	<nav>
+		<h2>Collections</h2>
+		<ul>
+			{% for collection in collections %}
+				<li>
+					<a href="/collections/{{ collection.id }}">{{ collection.name }}</a>
+				</li>
+			{% endfor %}
+		</ul>
+	</nav>
 {% endblock %}

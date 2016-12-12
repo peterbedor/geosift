@@ -34,6 +34,8 @@
 	{{ block('mainContent') }}
 
 	<div class="overlay js-hide" data-ref="overlay"></div>
+
+	<meta data-set="csrfToken" data-value="{{ csrf_token() }}">
 	<script src="/assets/js/script.min.js"></script>
 </body>
 </html>

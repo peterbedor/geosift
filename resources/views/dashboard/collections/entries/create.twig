@@ -1,0 +1,73 @@
+{% extends 'layouts.app' %}
+
+{% import 'macros.forms' as forms %}
+
+{% block content %}
+	{% include 'partials.sections.dashboard-navigation' %}
+
+	<h1>{{ collection.name }}</h1>
+
+	<form method="post" action="/collections/{{ collection.id }}/fields" data-ref="fieldForm">
+		{{ forms.select({
+			dataRefs: 'field',
+			name: 'field',
+			options: [
+				{
+					key: 'Phone Number',
+					value: 'phone-number'
+				},
+				{
+					key: 'Text Box',
+					value: 'textbox'
+				},
+				{
+					key: 'Textarea',
+					value: 'textarea'
+				},
+				{
+					key: 'Link',
+					value: 'link'
+				}
+			]
+		}) }}
+
+		{{ forms.input({
+			dataRefs: 'fieldName',
+			name: 'field_name',
+			label: 'Name'
+		}) }}
+
+		{{ forms.textarea({
+			dataRefs: 'fieldDescription',
+			name: 'field_description',
+			label: 'Description'
+		}) }}
+
+		{{ forms.button({
+			type: 'submit',
+			classes: 'button button-colored',
+			dataRefs: 'addField',
+			label: 'Add Field'
+		}) }}
+	</form>
+
+	<form method="post" action="/collections/{{ collection.id }}/entries">
+		{{ csrf_field() }}
+
+		{% for field in fields %}
+			{% if field.fieldType.name == 'Phone / Fax' %}
+				{% include 'partials.fieldtypes.phone' with { 'data': field } %}
+			{% elseif field.fieldType.name == 'Textbox' %}
+				{% include 'partials.fieldtypes.textbox' with { 'data': field } %}
+			{% elseif field.fieldType.name == 'Link' %}
+				{% include 'partials.fieldtypes.link' with { 'data': field } %}
+			{% endif %}
+		{% endfor %}
+
+		{{ forms.button({
+			type: 'submit',
+			label: 'Submit',
+			classes: 'button button-colored'
+		}) }}
+	</form>
+{% endblock %}

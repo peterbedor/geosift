@@ -60,6 +60,18 @@ Wee.fn.make('extension', {
 				options = options || {};
 
 				return this.on('click', callback, options)
+			},
+
+			change: function(callback, options) {
+				options = options || {};
+
+				return this.on('change', callback, options)
+			},
+
+			submit: function(callback, options) {
+				options = options || {};
+
+				return this.on('submit', callback, options)
 			}
 		});
 	}

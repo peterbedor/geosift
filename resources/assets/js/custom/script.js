@@ -4,7 +4,14 @@ Wee.routes.map({
 		'navigation'
 	],
 	'login': 'login',
-	'register': 'register'
+	'register': 'register',
+	'collections': {
+		'$num': {
+			'entries': {
+				'new': 'entry'
+			}
+		}
+	}
 });
 
 Wee.ready('routes:run');

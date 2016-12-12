@@ -27,4 +27,26 @@ class Account extends Model
 	{
 		return $this->hasMany(Widget::class);
     }
+
+	/**
+	 * Filter active accounts
+	 *
+	 * @param $query
+	 * @return mixed
+	 */
+	public function scopeActivated($query)
+	{
+		return $query->where('active', 1);
+	}
+
+	/**
+	 * Filter inactive accounts
+	 *
+	 * @param $query
+	 * @return mixed
+	 */
+	public function scopeDeactivated($query)
+	{
+		return $query->where('active', 0);
+	}
 }

@@ -1,0 +1,75 @@
+{% extends 'layouts.app' %}
+
+{% import 'macros.forms' as forms %}
+{% import 'macros.menu' as menu %}
+
+{% block content %}
+	{% include 'partials.sections.dashboard-navigation' %}
+
+	<h1>{{ collection.name }}</h1>
+
+	<a href="/collections/{{ collection.id }}/entries/new">Add Entry</a>
+
+	{% if entries|length %}
+		<table>
+			<thead>
+			<tr>
+				<th>Name</th>
+				<th>Street 1</th>
+				<th>Street 2</th>
+				<th>Municipality</th>
+				<th>Territory</th>
+				<th>Postal Code</th>
+				<th>Country</th>
+			</tr>
+			</thead>
+			<tbody>
+			{% for entry in entries %}
+				{% set relations = entry.getRelations() %}
+				<tr>
+					<td>{{ entry.name }}</td>
+					<td>{{ entry.street_1 }}</td>
+					<td>{{ entry.street_2 }}</td>
+					<td>{{ entry.municipality }}</td>
+					<td>{{ entry.territory }}</td>
+					<td>{{ entry.postal_code }}</td>
+					<td>{{ entry.country.name }}</td>
+				</tr>
+				<tr>
+					<td style="padding: 0">
+						Additional Fields
+						<table>
+							<thead>
+							<tr>
+								<th>
+									Field Name
+								</th>
+								<th>
+									Field Data
+								</th>
+							</tr>
+							</thead>
+
+							<tbody>
+							{% for relation in relations %}
+								<tr>
+									{% for item in relation %}
+										{% if item.field.field_type_id == 10 %}
+											{% include 'partials.fields.textbox' with { 'data': item } %}
+										{% elseif item.field.field_type_id == 12 %}
+											{% include 'partials.fields.phone' with { 'data': item } %}
+										{% elseif item.field.field_type_id == 9 %}
+											{% include 'partials.fields.link' with { 'data': item } %}
+										{% endif %}
+									{% endfor %}
+								</tr>
+							{% endfor %}
+							</tbody>
+						</table>
+					</td>
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table>
+	{% endif %}
+{% endblock %}

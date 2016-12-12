@@ -20,6 +20,7 @@ class CreateFieldLinksTable extends Migration
 			$table->unsignedInteger('entry_id')
 				->index();
 			$table->string('link');
+			$table->string('label');
             $table->timestamps();
 
 			$table->foreign('entry_id')

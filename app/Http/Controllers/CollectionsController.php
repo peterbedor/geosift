@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Account;
+use App\Models\Field;
 use Auth;
 use App\Http\Requests\StoreCollection as Request;
 use App\Models\Collection;
@@ -13,10 +15,17 @@ class CollectionsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($account)
     {
-		dd((new \App\Models\User)->find(1)->first());
-        return view('dashboard.collections.index');
+		$account = Account::where('slug', $account)->first();
+
+		$collections = $account->collections()
+			->withCount('entries')
+			->get();
+
+        return view('dashboard.collections.index', [
+        	'collections' => $collections
+		]);
     }
 
     /**
@@ -39,12 +48,13 @@ class CollectionsController extends Controller
     {
 		$collection = new Collection([
 			'name' => $request->input('name'),
-			'slug' => str_slug($request->input('name'))
+			'slug' => str_slug($request->input('name')),
+			'account_id' => Auth::user()->account_id
 		]);
 
-		$collection = $collection->save();
+		$collection->save();
 
-		return redirect('/home/collections/' . $collection->slug);
+		return redirect('/collections/' . $collection->id);
     }
 
     /**
@@ -53,9 +63,13 @@ class CollectionsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($account, Collection $collection)
     {
-        //
+
+		return view('dashboard.collections.show', [
+     		'collection' => $collection,
+			'entries' => $collection->entries()->with('country')->fields()->get()
+		]);
     }
 
     /**

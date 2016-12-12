@@ -22,6 +22,10 @@ Wee.fn.make('api', {
 	}
 }, {
 	send: function(conf) {
-		Wee.fetch.request(conf);
+		Wee.fetch.request($.extend(true, {
+			headers: {
+				'X-CSRF-TOKEN': Wee.$get('csrfToken')
+			}
+		}, conf));
 	}
 });

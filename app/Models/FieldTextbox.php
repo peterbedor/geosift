@@ -6,6 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class FieldTextbox extends Model
 {
+	protected $fillable = [
+		'field_id',
+		'entry_id',
+		'textbox'
+	];
+
     public function field()
 	{
 		return $this->belongsTo(Field::class);

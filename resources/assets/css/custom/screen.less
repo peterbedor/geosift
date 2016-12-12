@@ -203,6 +203,36 @@ html {
 
 
 /*------------------------------------*\
+	# Dashboard Nav
+\*------------------------------------*/
+
+.dashboard-navigation {
+	.background(@lightestGray);
+	.border(right; @lightGray);
+	.fixed(5.8; false; 0; 0);
+	.width(20);
+}
+
+
+
+
+
+/*------------------------------------*\
+	# Dashboard Content
+\*------------------------------------*/
+
+.dashboard-content {
+	.left(22);
+	.relative();
+	.top(2);
+	.width(calc(100% - 24rem));
+}
+
+
+
+
+
+/*------------------------------------*\
 	# Overlay
 \*------------------------------------*/
 
@@ -214,6 +244,38 @@ html {
 		.background(@black, 80%);
 		.fixed(0; 0; 0; 0);
 		.opaque();
+	}
+}
+
+
+
+
+
+/*------------------------------------*\
+	# Fieldtypes
+\*------------------------------------*/
+
+.fieldtype-phone {
+	.flexbox();
+	input&__country-code {
+		.min-width(8);
+		.margin(right; 2);
+		.max-width(8);
+	}
+	input&__area-code {
+		.min-width(8);
+		.margin(right; 2);
+		.max-width(8);
+	}
+	&__phone {
+		.min-width(20);
+		.margin(right; 2);
+		.max-width(20);
+	}
+	&__extension {
+		.min-width(15);
+		.margin(right; 2);
+		.max-width(15);
 	}
 }
 

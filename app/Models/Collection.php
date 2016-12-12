@@ -8,21 +8,31 @@ class Collection extends Model
 {
 	protected $fillable = [
 		'name',
-		'slug'
+		'slug',
+		'account_id'
 	];
 
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
 	public function account()
 	{
 		return $this->belongsTo(Account::class);
     }
 
+	/**
+	 * @return $this
+	 */
 	public function entries()
 	{
 		return $this->belongsToMany(Entry::class);
     }
 
-	public function widgets()
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+	 */
+	public function fields()
 	{
-		return $this->belongsTo(Widget::class);
-    }
+		return $this->belongsToMany(Field::class);
+	}
 }

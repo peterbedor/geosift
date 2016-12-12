@@ -3,6 +3,9 @@
 {% block mainContent %}
 
 	{% include 'partials.sections.header' with { modifier: '-app' } %}
+	{% include 'partials.sections.dashboard-navigation' %}
 
-	{{ block('content') }}
+	<main class="dashboard-content">
+		{{ block('content') }}
+	</main>
 {% endblock %}

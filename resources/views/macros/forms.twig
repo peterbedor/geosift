@@ -13,14 +13,18 @@
  # @param [params.size] - Input size (default 20)
 #}
 {% macro input(params) %}
-	<div class="{% if params.infieldLabel %} field -infield-label{% endif %}{% if params.parentClasses %} {{ params.parentClasses }}{% endif %}">
-		<label for="{{ params.id }}" {% if params.labelClass %}class="{{ params.labelClasses }}"{% endif %}>
-			{% if params.infieldLabel %}
-				{{ params.label|upper }}
-			{% else %}
-				{{ params.label }}
-			{% endif %}
-		</label>
+	{% if params.infieldLabel or params.parentClasses %}
+		<div class="{% if params.infieldLabel %} field -infield-label{% endif %}{% if params.parentClasses %} {{ params.parentClasses }}{% endif %}">
+	{% endif %}
+		{% if params.label %}
+			<label for="{{ params.id }}" {% if params.labelClasses %}class="{{ params.labelClasses }}"{% endif %}>
+				{% if params.infieldLabel %}
+					{{ params.label|upper }}
+				{% else %}
+					{{ params.label }}
+				{% endif %}
+			</label>
+		{% endif %}
 		<input
 			type="{{ params.type|default('text') }}"
 			name="{{ params.name }}"
@@ -37,16 +41,35 @@
 				{% endfor %}
 			{% endif %}
 		>
+	{% if params.infieldLabel or params.parentClasses %}
 	</div>
+	{% endif %}
 	{% include 'utilities.forms.errors' with {'errors': params.errors[params.name] } %}
 {% endmacro %}
 
 {% macro button(params) %}
-	<button type="{{ params.type }}"class="{{ params.classes }}">{{ params.label }}</button>
+	<button type="{{ params.type }}"{% if params.classes %} class="{{ params.classes }}"{% endif %}{% if params.dataRefs %} data-ref="{{ params.dataRefs }}"{% endif %}>{{ params.label }}</button>
 {% endmacro %}
 
 {% macro checkbox(params) %}
 	<label for="{{ params.id }}" class="{{ params.labelClasses }}">
 		<input type="checkbox" id="{{ params.id }}" name="{{ params.name }}"> {{ params.label }}
 	</label>
+{% endmacro %}
+
+{% macro select(params) %}
+	<select name="{{ params.name }}"{% if params.classes %} class="{{ params.classes }}"{% endif %}{% if params.dataRefs %} data-ref="{{ params.dataRefs }}"{% endif %}>
+		{% for option in params.options %}
+			<option value="{{ option.value }}">{{ option.key }}</option>
+		{% endfor %}
+	</select>
+{% endmacro %}
+
+{% macro textarea(params) %}
+	{% if params.label %}
+		<label for="{{ params.id }}" {% if params.labelClasses %}class="{{ params.labelClasses }}"{% endif %}>
+			{{ params.label }}
+		</label>
+	{% endif %}
+	<textarea name="{{ params.name }}"{% if params.dataRefs %} data-ref="{{ params.dataRefs }}"{% endif %}></textarea>
 {% endmacro %}

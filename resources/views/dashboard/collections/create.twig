@@ -5,7 +5,7 @@
 {% block content %}
 	{% include 'partials.sections.dashboard-navigation' %}
 
-	<form method="post" action="/home/collections">
+	<form method="post" action="/collections">
 		{{ csrf_field() }}
 
 		{{ forms.input({

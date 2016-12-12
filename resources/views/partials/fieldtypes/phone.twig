@@ -1,0 +1,9 @@
+<label>{{ data.name }}</label>
+
+<div class="fieldtype-phone">
+	<input type="hidden" name="field[{{ data.id }}][type_id]" value="{{ data.fieldType.id }}">
+	<input type="text" name="field[{{ data.id }}][country_code]" class="fieldtype-phone__country-code">
+	<input type="text" name="field[{{ data.id }}][area_code]" class="fieldtype-phone__area-code">
+	<input type="text" name="field[{{ data.id }}][phone]" class="fieldtype-phone__phone">
+	<input type="text" name="field[{{ data.id }}][extension]" class="fieldtype-phone__extension">
+</div>
