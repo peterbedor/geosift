@@ -1,32 +1,49 @@
-{% extends 'layouts/master' %}
+{% extends 'layouts.website' %}
+
+{% import 'macros.forms' as forms %}
+
+{% set errors = errors.messages %}
 
 {% block content %}
+	<form role="form" method="post" class="login">
+		<h1 class="login__heading">Log In</h1>
 
-	{% set errors = errors.messages %}
-	<form role="form" method="POST" action="" class="login">
+		{{ csrf_field() }}
 
+		{{ forms.input({
+			infieldLabel: true,
+			id: 'email',
+			name: 'email',
+			label: 'email',
+			value: old('email'),
+			errors: errors
+		}) }}
 
-		<label for="email" class="login__label" data-ref="inputLabel">
-			Email
-		</label>
-		<input id="email" type="email" name="email" value="" class="login__label-input" data-ref="input">
-		{% include 'utilities/forms/errors.twig' with {'errors': errors.email} %}
+		{{ forms.input({
+			infieldLabel: true,
+			id: 'password',
+			type: 'password',
+			label: 'password',
+			name: 'password',
+			errors: errors
+		}) }}
 
-		<label for="password" class="login__label" data-ref="inputLabel">
-			Password
-		</label>
-		<input id="password" type="password" name="password" class="login__label-input" data-ref="input">
-		{% include 'utilities/forms/errors.twig' with {'errors': errors.password} %}
+		{{ forms.button({
+			type: 'submit',
+			label: 'Login',
+			classes: 'button button-colored login__button'
+		}) }}
 
-		<button type="submit" class="login__button">Login</button>
-
-		<div class="login__footer">
+		<footer class="login__footer">
 			<a href="" class="login__reset-link">Forgot Your Password?</a>
 
-			<label class="login__checkbox-label">
-				<input type="checkbox" name="remember"> Remember Me
-			</label>
-		</div>
+			{{ forms.checkbox({
+				id: 'remember',
+				name: 'remember',
+				label: 'Remember Me',
+				labelClasses: 'login__remember-me'
+			}) }}
+		</footer>
 	</form>
 
 {% endblock %}

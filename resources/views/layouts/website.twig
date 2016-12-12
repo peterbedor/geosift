@@ -1,0 +1,12 @@
+{% extends 'layouts.master' %}
+
+{% block mainContent %}
+
+	{% include 'partials.sections.header' with { modifier: '-website' } %}
+
+	<div class="page-wrap" data-ref="pageWrap">
+		<div class="container">
+			{{ block('content') }}
+		</div>
+	</div>
+{% endblock %}

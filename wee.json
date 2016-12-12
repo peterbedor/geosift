@@ -66,12 +66,10 @@
 		"sourceMaps": true
 	},
 	"generator": {
-		"enable": true,
-		"build": [
-			"source/modules/guide/generate.json"
-		]
+		"enable": false,
+		"build": false
 	},
-	"defaultCommand": "run:static",
+	"defaultCommand": "run:local",
 	"server": {
 		"ghostMode": false,
 		"host": "auto",
@@ -82,9 +80,12 @@
 			"ignore": [],
 			"watch": {
 				"root": true,
-				"paths": [],
+				"paths": [
+					"../views/"
+				],
 				"extensions": [
-					"html"
+					"html",
+					"twig"
 				]
 			}
 		},

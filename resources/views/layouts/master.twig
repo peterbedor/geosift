@@ -7,7 +7,8 @@
 	<meta name="description" content="Blueprint for modern web development.">
 
 	<link rel="stylesheet" href="/assets/css/style.min.css">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather:400,700|Open+Sans:400,600,700">
+	<link rel="stylesheet" href="//cdn.materialdesignicons.com/1.7.22/css/materialdesignicons.min.css">
 
 	<link rel="apple-touch-icon" href="/assets/img/icons/touch.png">
 	<link rel="mask-icon" href="/assets/img/icons/pin.svg" color="#349bb9">
@@ -24,12 +25,15 @@
 	<meta property="og:image" content="https://www.weepower.com/assets/img/share.png" itemprop="image">
 
 	<!--[if lte IE 9]>
-	<script src="/assets/js/ie9.min.js"></script>
+		<script src="/assets/js/ie9.min.js"></script>
 	<![endif]-->
 </head>
 <body>
-	{{ block('content') }}
+	{% import 'macros.icons' as icon %}
 
+	{{ block('mainContent') }}
+
+	<div class="overlay js-hide" data-ref="overlay"></div>
 	<script src="/assets/js/script.min.js"></script>
 </body>
 </html>

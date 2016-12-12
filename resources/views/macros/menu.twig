@@ -1,0 +1,10 @@
+{% macro make(params) %}
+	<ul class="{{ params.menuClasses }}">
+		{% for link in params.links %}
+			<li class="{{ params.itemClasses }}">
+				<a href="{{ link.href }}" class="{{ params.linkClasses }}">{{ link.label }}</a>
+			</li>
+		{% endfor %}
+	</ul>
+{% endmacro %}
+

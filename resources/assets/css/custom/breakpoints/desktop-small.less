@@ -1,0 +1,70 @@
+/*------------------------------------*\
+	# Header
+\*------------------------------------*/
+
+.header {
+	.clearfix();
+	&__logo {
+		.align(left);
+		.left();
+	}
+	&__menu-toggle {
+		.hide();
+	}
+}
+
+
+
+
+
+/*------------------------------------*\
+	# Navigation
+\*------------------------------------*/
+
+.navigation {
+	.background(none);
+	.border(none);
+	.position(inherit);
+	.right();
+	.width(70%);
+	.z-index(10);
+	&__close {
+		.hide();
+	}
+	&.-is-disabled {
+		.right(0);
+	}
+	&.-website,
+	&.-app {
+		.navigation {
+			&__menu {
+				.align(right);
+				&-item {
+					.inline-block();
+				}
+				&-link {
+					.block();
+					.border(none);
+				}
+			}
+		}
+	}
+	&.-website {
+		.navigation {
+			&__menu {
+				&-link {
+					.padding(1.5; 3);
+				}
+			}
+		}
+	}
+	&.-app {
+		.navigation {
+			&__menu {
+				&-link {
+					.padding(.5; 1);
+				}
+			}
+		}
+	}
+}

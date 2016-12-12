@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -15,8 +16,10 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name',
+        'first_name',
+		'last_name',
 		'email',
+		'account_id',
 		'password'
     ];
 
@@ -32,6 +35,6 @@ class User extends Authenticatable
 
 	public function account()
 	{
-		return $this->belongsToMany(Account::class);
+		return $this->belongsTo(Account::class);
 	}
 }

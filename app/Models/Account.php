@@ -6,9 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Account extends Model
 {
+	protected $fillable = [
+		'name',
+		'slug',
+		'account_id',
+		'active'
+	];
+
 	public function users()
 	{
-		return $this->belongsToMany(User::class);
+		return $this->hasMany(User::class);
     }
 
 	public function collections()

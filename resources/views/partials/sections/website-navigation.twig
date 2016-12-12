@@ -1,0 +1,23 @@
+{% import 'macros.menu' as menu %}
+
+<nav class="navigation -is-disabled -website" data-ref="navigation">
+	{{ menu.make({
+		menuClasses: 'navigation__menu -website',
+		itemClasses: 'navigation__menu-item -website',
+		linkClasses: 'navigation__menu-link -website',
+		links: [
+			{ href: '/', label: 'Home'},
+			{ href: '/contact', label: 'Contact'},
+			{ href: '/about', label: 'About'},
+			{ href: '/login', label: 'Login'},
+			{ href: '/register', label: 'Register'}
+		]
+	}) }}
+
+	{{ icon.make({
+		name: 'close',
+		size: 'large',
+		classes: 'navigation__close',
+		dataRefs: 'menuToggle'
+	}) }}
+</nav>

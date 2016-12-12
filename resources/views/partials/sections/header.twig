@@ -1,0 +1,20 @@
+<header class="header{% if modifier %} {{ modifier }}{% endif %}" role="banner" data-ref="header">
+	<div class="header__inner">
+		<div class="header__logo">
+			{% include 'partials.global.logo' %}
+		</div>
+
+		{{ icon.make({
+			name: 'menu',
+			size: 'large',
+			classes: 'header__menu-toggle',
+			dataRefs: 'menuToggle'
+		}) }}
+
+		{% if auth_user() %}
+			{% include 'partials.sections.app-navigation' %}
+		{% else %}
+			{% include 'partials.sections.website-navigation' %}
+		{% endif %}
+	</div>
+</header>

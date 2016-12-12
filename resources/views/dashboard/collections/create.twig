@@ -1,0 +1,25 @@
+{% extends 'layouts.app' %}
+
+{% import 'macros.forms' as forms %}
+
+{% block content %}
+	{% include 'partials.sections.dashboard-navigation' %}
+
+	<form method="post" action="/home/collections">
+		{{ csrf_field() }}
+
+		{{ forms.input({
+			id: 'name',
+			name: 'name',
+			label: 'Name',
+			value: old('name'),
+			errors: errors
+		}) }}
+
+		{{ forms.button({
+			type: 'submit',
+			label: 'Submit',
+			classes: 'button button-colored'
+		}) }}
+	</form>
+{% endblock %}

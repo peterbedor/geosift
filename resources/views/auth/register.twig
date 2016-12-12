@@ -1,35 +1,79 @@
-{% extends 'layouts/master' %}
+{% extends 'layouts.website' %}
+
+{% import 'macros.forms' as forms %}
+
+{% set errors = errors.messages %}
 
 {% block content %}
-
-	{% set errors = errors.messages %}
 	<form role="form" method="post" action="" class="register" data-ref="register">
+		<h1 class="register__heading">Register</h1>
 
+		{{ csrf_field() }}
 
-		<label for="name" class="register__label">
-			Name
-		</label>
-		<input id="name" type="text" name="name" value="" class="register__label-input" data-ref="input">
-		{% include 'utilities/forms/errors.twig' with {'errors': errors.name} %}
+		{{ forms.input({
+			infieldLabel: true,
+			id: 'email',
+			name: 'email',
+			label: 'email',
+			value: old('email'),
+			errors: errors
+		}) }}
 
-		<label for="email" class="register__label" data-ref="inputLabel">
-			Email
-		</label>
-		<input id="email" type="email" name="email" value="" class="register__label-input" data-ref="input">
-		{% include 'utilities/forms/errors.twig' with {'errors': errors.email} %}
+		{{ forms.input({
+			infieldLabel: true,
+			id: 'first_name',
+			name: 'first_name',
+			label: 'first name',
+			value: old('first_name'),
+			errors: errors
+		}) }}
 
-		<label for="password" class="register__label" data-ref="inputLabel">
-			Password
-		</label>
-		<input id="password" type="password" name="password" class="register__label-input" data-ref="input">
-		{% include 'utilities/forms/errors.twig' with {'errors': errors.password} %}
+		{{ forms.input({
+			infieldLabel: true,
+			id: 'last_name',
+			name: 'last_name',
+			label: 'last name',
+			value: old('last_name'),
+			errors: errors
+		}) }}
 
-		<label for="password-confirm" class="register__label" data-ref="inputLabel">
-			Confirm Password
-		</label>
-		<input id="password-confirm" type="password" name="password_confirmation" class="register__label-input" data-ref="input">
-		{% include 'utilities/forms/errors.twig' with {'errors': errors.password_confirmation} %}
+		{{ forms.input({
+			infieldLabel: true,
+			id: 'account',
+			name: 'account',
+			label: 'account',
+			value: old('account'),
+			errors: errors
+		}) }}
 
-		<button type="submit" class="register__button">Register</button>
+		{{ forms.input({
+			infieldLabel: true,
+			id: 'password',
+			type: 'password',
+			name: 'password',
+			label: 'password',
+			errors: errors
+		}) }}
+
+		{{ forms.input({
+			infieldLabel: true,
+			id: 'password_confirmation',
+			type: 'password',
+			name: 'password_confirmation',
+			label: 'password confirmation',
+			errors: errors
+		}) }}
+
+		{{ forms.button({
+			type: 'submit',
+			label: 'Register',
+			classes: 'button button-colored login__button'
+		}) }}
+
+		<footer class="register__footer">
+			<p class="register__footer-policies">
+				By registering you agree to the <a href="/terms-of-service">Terms of Service</a> and <a href="privacy-policty">Privacy Policy</a>.
+			</p>
+		</footer>
 	</form>
 {% endblock %}

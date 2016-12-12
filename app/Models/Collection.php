@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Collection extends Model
 {
+	protected $fillable = [
+		'name',
+		'slug'
+	];
+
 	public function account()
 	{
 		return $this->belongsTo(Account::class);

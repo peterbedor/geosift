@@ -1,8 +1,10 @@
-// Add custom JavaScript here
-// Route documentation available at https://www.weepower.com/script/routes
-
 Wee.routes.map({
-	'$any': 'common'
+	'$any': [
+		'common',
+		'navigation'
+	],
+	'login': 'login',
+	'register': 'register'
 });
 
 Wee.ready('routes:run');

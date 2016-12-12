@@ -1,0 +1,15 @@
+{% macro make(params) %}
+	{% if params.size == 'small' %}
+		{% set size = 'mdi-18px' %}
+	{% elseif params.size == 'medium' %}
+		{% set size = 'mdi-24px' %}
+	{% elseif params.size == 'large' %}
+		{% set size = 'mdi-36px' %}
+	{% elseif params.size == 'xl' %}
+		{% set size = 'mdi-48px' %}
+	{% else %}
+		{% set size = 'mdi-36px' %}
+	{% endif %}
+
+	<i class="mdi mdi-{{ params.name }}{% if size %} {{ size }} {% endif %}{{ params.classes }}"{% if params.dataRefs %} data-ref="{{ params.dataRefs }}"{% endif %}></i>
+{% endmacro %}

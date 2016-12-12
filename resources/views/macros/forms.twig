@@ -1,0 +1,52 @@
+{# Input macro
+ #
+ # @param [params.infieldLabel] - Enable infield label plugin
+ # @param [params.parentClasses] - Class for parent div
+ # @param [params.labelClasses[ - Class for label
+ # @param [params.inputClasses] - Class for input
+ # @param [params.name] - Input name
+ # @param [params.tyoe] - Input type
+ # @param [params.id] - Input id
+ # @param [params.dataRef] - Input data-refs
+ # @param [params.data] - Additional data attributes
+ # @param [params.value] - Input value
+ # @param [params.size] - Input size (default 20)
+#}
+{% macro input(params) %}
+	<div class="{% if params.infieldLabel %} field -infield-label{% endif %}{% if params.parentClasses %} {{ params.parentClasses }}{% endif %}">
+		<label for="{{ params.id }}" {% if params.labelClass %}class="{{ params.labelClasses }}"{% endif %}>
+			{% if params.infieldLabel %}
+				{{ params.label|upper }}
+			{% else %}
+				{{ params.label }}
+			{% endif %}
+		</label>
+		<input
+			type="{{ params.type|default('text') }}"
+			name="{{ params.name }}"
+			value="{{ params.value|e }}"
+			size="{{ params.size|default(20) }}"
+			id="{{ params.id }}"
+			class="{{ params.inputClasses }}"
+			{% if params.infieldLabel or params.dataRefs %}
+				data-ref="{% if params.infieldLabel %}infieldInput{% endif %} {% if params.dataRefs %}{{ params.dataRefs }}{% endif %}"
+			{% endif %}
+			{% if params.data %}
+				{% for key,val in params.data %}
+					data-{{ key }}="{{ val }}"
+				{% endfor %}
+			{% endif %}
+		>
+	</div>
+	{% include 'utilities.forms.errors' with {'errors': params.errors[params.name] } %}
+{% endmacro %}
+
+{% macro button(params) %}
+	<button type="{{ params.type }}"class="{{ params.classes }}">{{ params.label }}</button>
+{% endmacro %}
+
+{% macro checkbox(params) %}
+	<label for="{{ params.id }}" class="{{ params.labelClasses }}">
+		<input type="checkbox" id="{{ params.id }}" name="{{ params.name }}"> {{ params.label }}
+	</label>
+{% endmacro %}

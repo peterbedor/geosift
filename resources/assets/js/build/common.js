@@ -1,14 +1,40 @@
-// Controller documentation available at https://www.weepower.com/script/core#fnmake
-
 Wee.fn.make('common', {
-	_construct: function() {
-		// ...
-	},
 	init: function() {
-		this.$private.method();
+		this.$private.initHistory();
 	}
 }, {
-	method: function() {
-		// ...
+	initHistory: function() {
+		// Wee history
+		// $.history.init({
+		// 	bind: {
+		// 		click: 'a'
+		// 	},
+		// 	request: {
+		// 		success: function() {
+		// 			// TODO: enable when GA script has been added
+		// 			// ga('send', 'pageview');
+		// 		},
+		// 		error: function(xhr) {
+		// 			$._win.location = xhr.responseURL;
+		// 		}
+		// 	}
+		// });
+
+		// Disable mouse event outlines
+		$('a').on('mousedown', function() {
+			var $el = $(this);
+
+			if ($el.css('outline-style') == 'none') {
+				var outlineClass = '-no-outline';
+
+				$el.addClass(outlineClass).on('blur', function() {
+					$el.removeClass(outlineClass);
+				}, {
+					once: true
+				});
+			}
+		}, {
+			delegate: $._body
+		});
 	}
 });

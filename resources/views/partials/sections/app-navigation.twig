@@ -1,0 +1,20 @@
+{% import 'macros.menu' as menu %}
+
+<nav class="navigation -is-disabled -app" data-ref="navigation">
+	{{ menu.make({
+		menuClasses: 'navigation__menu -app',
+		itemClasses: 'navigation__menu-item -app',
+		linkClasses: 'navigation__menu-link -app',
+		links: [
+			{ href: '/home/settings', label: 'Settings'},
+			{ href: '/logout', label: 'Logout'}
+		]
+	}) }}
+
+	{{ icon.make({
+		name: 'close',
+		size: 'large',
+		classes: 'navigation__close',
+		dataRefs: 'menuToggle'
+	}) }}
+</nav>
